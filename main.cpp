@@ -1,6 +1,8 @@
 #include <ncurses.h>
 #include <vector>
 #include <string>
+#include "Jugador.h"
+
 using namespace std;
 int Menu(vector<string>);
 int* show(int**, int, int);
@@ -202,6 +204,19 @@ int** setGame(int Minas, int Y, int X) {
 	}
 	return Matriz;
 }
+void recursiva(int** numeros, char** show, int x, int y){
+	if(numeros[y][x]!=0){
+		show[y][x] = numeros[y][x]+48;
+		return;
+	} else{
+		if(numeros[y][x]==0){
+			show[y][x] = numeros[y][x]+48;
+			if(numeros[y]){
 
+			}
+		}
+		
+	}
+	
 
-
+}
