@@ -18,6 +18,21 @@ int main (){
 	MenuItems.push_back("Jugar");
 	int op =0;
 	op = Menu(MenuItems);
+	show(MatrizNum, 9, 9);
+	bool NotLose = true;
+	while (NotLose) {
+		XY = showChar(Matriz, 9, 9);
+		int x = XY[0];
+		int y = XY[1];
+		Matriz[y][x] = (MatrizNum[y][x]+48);
+		if (MatrizNum[y][x]==-1) {
+			NotLose = false;
+			Matriz[y][x] = 'X';
+		}
+	}
+	showChar(Matriz, 9, 9);
+	addstr("\n Oficialmente perdio :P");
+	getch();
 	endwin();	
 	return 0;
 }
