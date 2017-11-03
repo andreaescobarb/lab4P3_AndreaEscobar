@@ -2,19 +2,22 @@
 #include <vector>
 #include <string>
 using namespace std;
-//int Menu();
-int main () {
+int Menu(vector<string>);
+
+int main ();
 	initscr();
 	vector<string> MenuItems;
-	/*MenuItems.push_back("Agregar nuevo Jugador");
+	MenuItems.push_back("Agregar nuevo Jugador");
 	MenuItems.push_back("Eliminar nuevo Jugador");
 	MenuItems.push_back("Modificar nuevo Jugador");
 	MenuItems.push_back("Highscores");
-	MenuItems.push_back("Jugar");*/
+	MenuItems.push_back("Jugar");
+	int op =0;
+	op = Menu(MenuItems);
 	endwin();	
 	return 0;
 }
-/*int Menu(vector<string> vec) {
+int Menu(vector<string> vec) {
 	int op = 0;
 	int ch = 0;
 	while (ch != '\n') {
@@ -45,6 +48,6 @@ int main () {
 	}	
 	refresh();
 	return op;
-}*/
+}
 
 
