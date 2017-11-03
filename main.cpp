@@ -4,7 +4,7 @@
 using namespace std;
 int Menu(vector<string>);
 
-int main ();
+int main (){
 	initscr();
 	vector<string> MenuItems;
 	MenuItems.push_back("Agregar nuevo Jugador");
