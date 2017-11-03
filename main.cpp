@@ -5,6 +5,7 @@ using namespace std;
 int Menu(vector<string>);
 int* show(int**, int, int);
 int* showChar(char**, int, int);
+int** SetGame(int, int, int);
 int main (){
 	initscr();
 	vector<string> MenuItems;
@@ -153,6 +154,53 @@ int* showChar(char** Tabla, int Xlength, int Ylength) {
 	XY[0] = x;
 	XY[1] = y;
 	return XY;
+}
+int** setGame(int Minas, int Y, int X) {
+	int** Matriz = new int*[9];
+	for (int i = 0;i<9;i++) {
+		Matriz[i] = new int[9];
+	}
+	for (int i = 0;i<Y;i++) {
+		for (int j = 0;j<X;j++) {
+			Matriz[i][j] = 0;
+		}
+	}
+	for (int i = 0;i<Minas;i++) {
+		int v1 = rand() % Y;
+		int v2 = rand() % X;  
+		Matriz[v1][v2] = -1;
+	}
+	for (int i = 1;i<Y;i++) {
+		for (int j = 1;j<X;j++) {
+			if (Matriz[i][j] == -1) {
+				if (Matriz[i+1][j]!=-1) {
+					Matriz[i+1][j]++;
+				}
+				if (Matriz[i-1][j]!=-1) {
+					Matriz[i-1][j]++;
+				}
+				if (Matriz[i][j+1]!=-1) {
+					Matriz[i][j+1]++;
+				}
+				if (Matriz[i][j-1]!=-1) {
+					Matriz[i][j-1]++;
+				}
+				if (Matriz[i+1][j+1]!=-1) {
+					Matriz[i+1][j+1]++;
+				}
+				if (Matriz[i+1][j-1]!=-1) {
+					Matriz[i+1][j-1]++;
+				}
+				if (Matriz[i-1][j+1]!=-1) {
+					Matriz[i-1][j+1]++;
+				}
+				if (Matriz[i-1][j-1]!=-1) {
+					Matriz[i-1][j-1]++;
+				}
+			}
+		}
+	}
+	return Matriz;
 }
 
 
