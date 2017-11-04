@@ -328,9 +328,13 @@ void Game() {
 			NotLose = false;
 			Matriz[y][x] = 'X';
 		}
+		if (MatrizNum[y][x]==0) {
+			//recursiva(MatrizNum, Matriz, y, x);		
+		}
 	}
 	showChar(Matriz, 9, 9);
 	addstr("\n Oficialmente perdio :P");
+	delete[] XY;
 	getch();
 }
 int ListarVector(vector<Jugador*>* vList) {
