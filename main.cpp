@@ -8,31 +8,46 @@ int Menu(vector<string>);
 int* show(int**, int, int);
 int* showChar(char**, int, int);
 int** SetGame(int, int, int);
+string getString();
+int ListarVector(vector<Jugador*>* vList);
+void Game();
+
 int main (){
 	initscr();
 	vector<string> MenuItems;
+	vector<Jugador*>* vJugadores = new vector<Jugador*>();
 	MenuItems.push_back("Agregar nuevo Jugador");
-	MenuItems.push_back("Eliminar nuevo Jugador");
-	MenuItems.push_back("Modificar nuevo Jugador");
+	MenuItems.push_back("Eliminar Jugador");
+	MenuItems.push_back("Modificar Jugador");
 	MenuItems.push_back("Highscores");
 	MenuItems.push_back("Jugar");
-	int op =0;
-	op = Menu(MenuItems);
-	show(MatrizNum, 9, 9);
-	bool NotLose = true;
-	while (NotLose) {
-		XY = showChar(Matriz, 9, 9);
-		int x = XY[0];
-		int y = XY[1];
-		Matriz[y][x] = (MatrizNum[y][x]+48);
-		if (MatrizNum[y][x]==-1) {
-			NotLose = false;
-			Matriz[y][x] = 'X';
+	MenuItems.push_back("Salir");
+	int op = 0;
+	while (op != 5) {
+		op = Menu(MenuItems);
+		switch (op) {
+			case 0: {
+				clear();
+				addstr("Ingrese Nombre: \n");
+				string Nombre = getString();
+				Jugador* J = new Jugador(Nombre, "", "", 0);
+				vJugadores->push_back(J);
+			} break;
+			case 1: {
+			
+			} break;
+			case 2: {
+
+			} break;
+			case 3: {
+				ListarVector(vJugadores);
+			} break;
+			case 4: {
+				Game();
+			} break;
 		}
 	}
-	showChar(Matriz, 9, 9);
-	addstr("\n Oficialmente perdio :P");
-	getch();
+
 	endwin();	
 	return 0;
 }
@@ -265,3 +280,90 @@ void recursiva(int** numeros, char** show, int y, int x){
 	
 
 }
+string getString() {
+	string Nombre;
+	noecho();
+	int ch = '0';
+	int i = 0;
+	while (ch != '\n') {
+		ch = getch();
+		//127 == BS
+		if (ch==127) {
+			Nombre.erase(Nombre.length()-1);
+		} else {
+			Nombre.push_back(ch);
+		}
+		clear();
+		addstr(Nombre.c_str());
+	}
+	Nombre.erase(Nombre.length()-1);
+	if (Nombre.size()==0) {
+		return "NoString";
+	} else {
+		return Nombre;
+	}
+
+}
+
+void Game() {
+	int* XY;
+	int** MatrizNum = setGame(10, 9, 9);
+	char** Matriz = new char*[9];
+	for (int i = 0;i<9;i++) {
+		Matriz[i] = new char[9];
+	}
+	for (int i = 0;i<9;i++) {
+		for (int j = 0;j<9;j++) {
+			Matriz[i][j] = '_';
+		}
+	}
+	show(MatrizNum, 9, 9);
+	bool NotLose = true;
+	while (NotLose) {
+		XY = showChar(Matriz, 9, 9);
+		int x = XY[0];
+		int y = XY[1];
+		Matriz[y][x] = (MatrizNum[y][x]+48);
+		if (MatrizNum[y][x]==-1) {
+			NotLose = false;
+			Matriz[y][x] = 'X';
+		}
+	}
+	showChar(Matriz, 9, 9);
+	addstr("\n Oficialmente perdio :P");
+	getch();
+}
+int ListarVector(vector<Jugador*>* vList) {
+	int op = 0;
+	int ch = 0;
+	while (ch != '\n') {
+		clear();
+		for (int i = 0;i<vList->size();i++) {
+			addstr(vList->at(i)->getNombre().c_str());
+			addstr(" Score: ");
+			addstr(to_string(vList->at(i)->getScore()).c_str());
+			if (op == i) {
+				addstr(" <-");
+			}
+			addstr("\n");
+			addstr("\n");
+		}		
+		ch = getch();
+		//Key Down == 66
+		if (ch == 66) {
+			op++;
+			if (op >= vList->size()) {
+				op = 0;
+			}
+		}
+		//Key Down == 65
+		if (ch == 65) {
+			op--;
+			if (op < 0) {
+				op = vList->size();
+			}
+		}
+	}	
+	return op;
+}
+
