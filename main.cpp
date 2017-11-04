@@ -219,15 +219,45 @@ int** setGame(int Minas, int Y, int X) {
 	}
 	return Matriz;
 }
-void recursiva(int** numeros, char** show, int x, int y){
+void recursiva(int** numeros, char** show, int y, int x){
 	if(numeros[y][x]!=0){
 		show[y][x] = numeros[y][x]+48;
 		return;
 	} else{
 		if(numeros[y][x]==0){
 			show[y][x] = numeros[y][x]+48;
-			if(numeros[y]){
+			if(numeros[y+1][x]==0){
+				show[y+1][x]=numeros[y+1][x]+48;
+				return recursiva(numeros, show, y+1, x);
+			}
+			if(numeros[y-1][x]==0){
 
+				show[y-1][x]= numeros[y-1][x]+48;
+				return recursiva(numeros, show, y-1, x );
+			}
+			if(numeros[y-1][x-1]==0){
+				show[y-1][x-1] = numeros[y-1][x-1]+48;
+				return recursiva(numeros, show, y-1, x-1);
+			}
+			if(numeros[y+1][x+1]==0){
+				show[y+1][x+1] = numeros[y+1][x+1]+48;
+				return recursiva(numeros, show, y+1, x+1);
+			}
+			if(numeros[y-1][x+1]==0){
+				show[y-1][x+1]= numeros[y-1][x+1]+48;
+				return recursiva(numeros, show, y-1, x+1);
+			}
+			if(numeros[y+1][x-1]==0){
+				show[y+1][x-1] = numeros[y+1][x-1]+48;
+				return recursiva(numeros, show, y+1, x-1);
+			}
+			if(numeros[y][x-1]==0){
+				show[y][x-1] = numeros[y][x-1]+48;
+				return recursiva(numeros, show, y, x-1);
+			}
+			if(numeros[y][x+1]==0){
+				show[y][x+1] = numeros[y][x+1]+48;
+				return recursiva(numeros, show, y, x+1);
 			}
 		}
 		
